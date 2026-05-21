@@ -17,7 +17,8 @@
   --filter-font: "Roboto Mono", monospace;
   --filter-bg: #211513;
   --filter-active-bg: #905500;
-  --filter-text: #F1DBB5
+  --filter-text: #F1DBB5;
+  --filter-active-text: #FFFBE8;
 }
 
 @theme inline {
@@ -91,6 +92,7 @@
 
   .active-filter {
     background-color: var(--filter-active-bg);
+    color: var(--filter-active-text)
   }
 }
 
