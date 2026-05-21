@@ -9,6 +9,16 @@ vi.mock("./-hooks/useCharacters", () => ({
     useCharacter: (props: any) => mockUseCharacter(props),
 }));
 
+vi.mock("@tanstack/react-router", async () => {
+    const actual = await vi.importActual<typeof import("@tanstack/react-router")>(
+        "@tanstack/react-router"
+    );
+    return {
+        ...actual,
+        Link: ({ children, ...props }: any) => <a {...props}>{children}</a>,
+    };
+});
+
 import { Route, RouteComponent } from "./$characterId";
 
 const hermione = {
@@ -55,5 +65,37 @@ describe("Character detail page", () => {
         expect(screen.getByText("Emma Watson")).toBeInTheDocument();
         expect(screen.getByText("human")).toBeInTheDocument();
         expect(screen.getByText("otter")).toBeInTheDocument();
+    });
+
+    it("shows loader when the hook is loading", () => {
+        vi.spyOn(Route as any, "useLoaderData").mockReturnValue({
+            character: hermione,
+            characterId: hermione.id,
+        });
+        mockUseCharacter.mockReturnValue({
+            character: undefined,
+            isLoading: true,
+            isError: false,
+        });
+
+        render(<RouteComponent />);
+        // Spinner renders the character
+        expect(screen.getByText("⍥")).toBeInTheDocument();
+    });
+
+    it("shows 404 when character is not found", () => {
+        vi.spyOn(Route as any, "useLoaderData").mockReturnValue({
+            character: null,
+            characterId: null,
+        });
+        mockUseCharacter.mockReturnValue({
+            character: null,
+            isLoading: false,
+            isError: false,
+        });
+
+        render(<RouteComponent />);
+        expect(screen.getByText("Character not found")).toBeInTheDocument();
+        expect(screen.getByText("Go Home")).toBeInTheDocument();
     });
 });

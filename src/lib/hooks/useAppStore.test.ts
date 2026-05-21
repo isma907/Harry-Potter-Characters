@@ -24,4 +24,28 @@ describe("useAppStore", () => {
       expect(useAppStore.getState().preferredHouse).toBeUndefined();
     });
   });
+
+  describe("toggleFavorite", () => {
+    beforeEach(() => {
+      useAppStore.setState({ favorites: [] });
+    });
+
+    it("adds an id to favorites", () => {
+      useAppStore.getState().toggleFavorite("abc");
+      expect(useAppStore.getState().favorites).toContain("abc");
+    });
+
+    it("removes an existing id from favorites", () => {
+      useAppStore.setState({ favorites: ["abc"] });
+      useAppStore.getState().toggleFavorite("abc");
+      expect(useAppStore.getState().favorites).not.toContain("abc");
+    });
+
+    it("toggles correctly when called twice", () => {
+      useAppStore.getState().toggleFavorite("xyz");
+      expect(useAppStore.getState().favorites).toContain("xyz");
+      useAppStore.getState().toggleFavorite("xyz");
+      expect(useAppStore.getState().favorites).not.toContain("xyz");
+    });
+  });
 });
