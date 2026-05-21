@@ -4,6 +4,8 @@ import { useAppStore } from "@lib/hooks/useAppStore";
 import { houses } from "@lib/constants/houses";
 import { HouseCard } from "./HouseCard";
 
+import { useRouterState } from "@tanstack/react-router";
+
 interface HousePreferenceGatewayProps {
   children: ReactNode;
 }
@@ -11,8 +13,10 @@ interface HousePreferenceGatewayProps {
 export const HousePreferenceGateway = ({ children }: HousePreferenceGatewayProps) => {
   const preferredHouse = useAppStore((store) => store.preferredHouse);
   const setPreferredHouse = useAppStore((store) => store.setPreferredHouse);
+  const routerState = useRouterState();
+  const isRootRoute = routerState.location.pathname === "/";
 
-  if (preferredHouse !== undefined) return <>{children}</>;
+  if (preferredHouse !== undefined || !isRootRoute) return <>{children}</>;
 
   return (
     <div className="flex flex-col items-center justify-center gap-8 pt-30">

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchCharacters } from "@lib/api/characters";
+import { fetchCharacter, fetchCharacters } from "@lib/api/characters";
 import { useAppStore } from "@lib/hooks/useAppStore";
 import { Character } from "@lib/constants/characters";
 
@@ -20,6 +20,31 @@ export const useCharacters = () => {
 
   return {
     characters,
+    ...rest,
+  };
+};
+
+
+interface UseCharacterOptions {
+  characterId?: string | null;
+  initialData?: Character | null;
+}
+
+export const useCharacter = ({
+  characterId,
+  initialData,
+}: UseCharacterOptions) => {
+  const { data, ...rest } = useQuery<Character | null>({
+    queryKey: ["character", characterId],
+    queryFn: () => fetchCharacter(characterId!),
+    enabled: Boolean(characterId),
+    initialData,
+    staleTime: Infinity,
+    refetchOnMount: false,
+  });
+
+  return {
+    character: data ?? null,
     ...rest,
   };
 };
