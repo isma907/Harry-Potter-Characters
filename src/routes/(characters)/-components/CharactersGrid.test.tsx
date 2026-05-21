@@ -42,7 +42,7 @@ describe("CharactersGrid filter", () => {
             characters: mockCharacters,
             isLoading: false,
             isError: false,
-        });
+        } as any);
     });
 
     it("renders all characters when filter is all", () => {

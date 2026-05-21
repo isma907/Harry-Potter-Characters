@@ -1,5 +1,4 @@
 {
-  "homepage": "https://isma907.github.io/Harry-Potter-Characters",
   "name": "the-harry-potter-app",
   "version": "1.0.0",
   "private": true,
@@ -11,9 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "test:coverage": "vitest run --coverage"
   },
   "devDependencies": {
     "@tanstack/router-plugin": "^1.166.14",
@@ -25,7 +22,6 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.5.2",
     "@vitest/coverage-v8": "^4.1.0",
-    "gh-pages": "^6.3.0",
     "jsdom": "^29.0.0",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
