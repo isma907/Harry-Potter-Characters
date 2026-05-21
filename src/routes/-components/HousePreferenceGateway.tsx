@@ -12,7 +12,7 @@ export const HousePreferenceGateway = ({ children }: HousePreferenceGatewayProps
   const preferredHouse = useAppStore((store) => store.preferredHouse);
   const setPreferredHouse = useAppStore((store) => store.setPreferredHouse);
 
-  if (preferredHouse) return <>{children}</>;
+  if (preferredHouse !== undefined) return <>{children}</>;
 
   return (
     <div className="flex flex-col items-center justify-center gap-8 pt-30">
@@ -26,9 +26,14 @@ export const HousePreferenceGateway = ({ children }: HousePreferenceGatewayProps
         ))}
       </div>
 
+
+      {/** Second issue
+        Show all characters button was not working. Implemented navigation, queryParams strategy to retrieve the expected result for filtering
+        */}
       <Button onClick={() => setPreferredHouse(null)} className="self-center text-lg">
         Show all characters
       </Button>
+
     </div>
   );
 };

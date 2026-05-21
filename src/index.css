@@ -1,15 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
 @import "tailwindcss";
 
 .dark,
 :root {
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.9 0.05 85.9);
+  --character-card-bg: #09090B;
+  --favorite-color: #9F9A81;
+
+  --character-item-label: #53524F;
+  --character-item-description: ##53524F;
+  --character-separator: #E5E7EB;
+
+
+  --filter-font: "Roboto Mono", monospace;
+  --filter-bg: #211513;
+  --filter-active-bg: #905500;
+  --filter-text: #F1DBB5
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-character-card-bg: var(--character-card-bg);
   --font-decorative: "Cinzel Decorative", "sans-serif";
 }
 
@@ -17,11 +31,66 @@
   * {
     @apply border-gray-200 dark:border-gray-800;
   }
+
   body {
     @apply bg-linear-to-br from-gray-950 via-stone-900 to-amber-950;
     @apply min-h-screen;
     @apply font-decorative;
     @apply bg-background text-foreground;
+  }
+
+  .bg-character-card {
+    background-color: var(--color-character-card-bg);
+  }
+
+  .text-favorite {
+    color: var(--favorite-color);
+  }
+
+  .text-character-item-label {
+    @apply text-base font-normal leading-[130%] tracking-normal;
+    color: var(--character-item-label);
+  }
+
+  .text-character-item-description {
+    @apply text-base font-normal leading-[130%] tracking-normal;
+    color: var(--character-item-description);
+  }
+
+  .separator {
+    background-color: var(--character-separator);
+    width: 100%;
+    height: 1px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .section-header-title {
+    @apply mb-3 text-[22px] font-bold;
+    margin: 0
+  }
+
+  .filter-wrapper {
+    font-family: var(--filter-font);
+    background-color: var(--filter-bg);
+    border-radius: 12px;
+    padding: 4px;
+    font-weight: 500;
+    color: var(--filter-text);
+  }
+
+  .filter-option {
+    padding: 8px 16px;
+    border-radius: 8px;
+  }
+
+  .active-filter {
+    background-color: var(--filter-active-bg);
   }
 }
 

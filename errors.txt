@@ -1,3 +1,0 @@
-first issue
-- Bug: character list did not refresh when changing house selection.
-  Root cause: React Query key was not normalized for preferredHouse values, causing inconsistent cache behavior between `undefined` and `null` states.
