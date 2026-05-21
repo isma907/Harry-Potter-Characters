@@ -42,7 +42,7 @@ function renderCharacterProp(label: string, value?: string | number | boolean | 
 }
 
 
-function RouteComponent() {
+export function RouteComponent() {
     const { character: initialCharacter, characterId } = Route.useLoaderData()
 
     const { character, isLoading } = useCharacter({

@@ -63,4 +63,32 @@ export const mockCharacters: Character[] = [
     hogwartsStaff: false,
     alive: false,
   },
+  {
+    "id": "ca3827f0-375a-4891-aaa5-f5e8a5bad225",
+    "name": "Minerva McGonagall",
+    "alternate_names": [],
+    "species": "human",
+    "gender": "female",
+    "house": "Gryffindor",
+    "dateOfBirth": "04-10-1925",
+    "yearOfBirth": 1925,
+    "wizard": true,
+    "ancestry": "half-blood",
+    "eyeColour": "",
+    "hairColour": "black",
+    "wand": {
+      "wood": "fir",
+      "core": "dragon heartstring",
+      "length": 9.5
+    },
+    "patronus": "tabby cat",
+    "hogwartsStudent": false,
+    "hogwartsStaff": true,
+    "actor": "Dame Maggie Smith",
+    "alternate_actors": [],
+    "alive": true,
+    "image": "https://ik.imagekit.io/hpapi/mcgonagall.jpg"
+  }
 ];
+
+
