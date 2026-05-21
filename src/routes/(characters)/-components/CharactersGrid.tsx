@@ -2,9 +2,14 @@ import { Spinner } from "@lib/components/Spinner";
 import { CharacterCard } from "./CharacterCard";
 import { useCharacters } from "../-hooks/useCharacters";
 import { Link } from "@tanstack/react-router";
+import { Route } from "../index";
+import { useAppStore } from "@lib/hooks/useAppStore";
+import { cn } from "@lib/utils";
 
 export const CharactersGrid = () => {
   const { characters, isLoading, isError } = useCharacters();
+  const { filter = "all" } = Route.useSearch();
+  const favorites = useAppStore((state) => state.favorites || []);
 
   if (isLoading) {
     return (
@@ -23,26 +28,60 @@ export const CharactersGrid = () => {
     );
   }
 
-  if (characters.length === 0) {
-    return (
-      <div className="flex flex-col items-center gap-2 py-20 text-center">
-        <p className="text-lg text-amber-200/60">No characters found.</p>
-        <p className="text-sm text-amber-200/30">Try adjusting your filters or search query.</p>
-      </div>
-    );
-  }
+  const filteredCharacters = characters.filter((character) => {
+    if (filter === "students") return character.hogwartsStudent;
+    if (filter === "staff") return character.hogwartsStaff;
+    if (filter === "favorite") return favorites.includes(character.id);
+    return true;
+  });
+
+  const filterOptions = [
+    { value: "all", label: "All Characters" },
+    { value: "students", label: "Students" },
+    { value: "staff", label: "Staff" },
+    { value: "favorite", label: "Favorite" },
+  ] as const;
 
   return (
-    <div className="container mx-auto grid w-min grid-cols-[repeat(auto-fill,minmax(200px,max-content))] gap-4">
-      {characters.map((character) => (
-        <Link to={"/$characterId"} params={{ characterId: character.id }} key={character.id} >
-          <CharacterCard
-            key={character.id}
-            character={character}
-            className="transition-transform duration-300 hover:scale-105 hover:shadow-xl"
-          />
-        </Link>
-      ))}
-    </div>
+    <>
+      <div className="flex justify-center">
+        <div className="filter-wrapper flex gap-1 p-1">
+          {filterOptions.map((opt) => (
+            <Link
+              key={opt.value}
+              to="/"
+              search={{ filter: opt.value }}
+              className={cn(
+                "filter-option",
+                filter === opt.value
+                  ? "active-filter "
+                  : "hover:text-amber-100"
+              )}
+            >
+              {opt.label}
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {filteredCharacters.length === 0 ? (
+        <div className="flex flex-col items-center gap-2 py-20 text-center">
+          <p className="text-lg text-amber-200/60">No characters found.</p>
+          <p className="text-sm text-amber-200/30">Try adjusting your filters or search query.</p>
+        </div>
+      ) : (
+        <div className="container mx-auto grid w-min grid-cols-[repeat(auto-fill,minmax(200px,max-content))] gap-4">
+          {filteredCharacters.map((character) => (
+            <Link to={"/$characterId"} params={{ characterId: character.id }} key={character.id} >
+              <CharacterCard
+                key={character.id}
+                character={character}
+                className="transition-transform duration-300 hover:scale-105 hover:shadow-xl"
+              />
+            </Link>
+          ))}
+        </div>
+      )}
+    </>
   );
 };
