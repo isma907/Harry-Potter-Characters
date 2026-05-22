@@ -18,7 +18,7 @@ export const CharacterCard = ({ character, className }: CharacterCardProps) => {
   return (
     <article
       className={cn(
-        "relative isolate flex h-87.5 flex-col justify-end overflow-hidden rounded-2xl px-3 py-6 shadow-md shadow-zinc-950",
+        "relative isolate flex h-87.5 flex-col justify-end overflow-hidden rounded-[20px] px-3 py-6 shadow-md shadow-zinc-950",
         className
       )}
     >
@@ -30,7 +30,7 @@ export const CharacterCard = ({ character, className }: CharacterCardProps) => {
           e.stopPropagation();
           toggleFavorite(character.id);
         }}
-        className="absolute top-4 right-4 z-20 flex h-9 w-9 items-center justify-center  cursor-pointer"
+        className="absolute top-3 right-3 z-20 flex h-9 w-9 items-center justify-center  cursor-pointer"
         aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
       >
         <Star
