@@ -1,6 +1,6 @@
 export const Item = ({ label, value }: { label: string; value: React.ReactNode }) => (
-  <div>
-    <p className="text-sm text-amber-50/30">{label}</p>
-    <p className="font-light tracking-wide">{value}</p>
+  <div className="flex flex-col gap-[10px]">
+    <p className="text-character-item-label">{label}</p>
+    <p className="text-character-item-description">{value}</p>
   </div>
 );

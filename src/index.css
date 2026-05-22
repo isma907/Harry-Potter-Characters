@@ -64,18 +64,6 @@
     height: 1px;
   }
 
-  .section-header {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    gap: 10px;
-  }
-
-  .section-header-title {
-    @apply mb-3 text-[22px] font-bold;
-    margin: 0
-  }
-
   .filter-wrapper {
     font-family: var(--filter-font);
     background-color: var(--filter-bg);

@@ -4,6 +4,7 @@ import { Spinner } from '@lib/components/Spinner'
 import { formatDate } from '@lib/utils'
 import { useCharacter } from './-hooks/useCharacters'
 import { fetchCharacter } from '@lib/api/characters'
+import { InfoSection } from '@lib/components/InfoSection'
 
 export const Route = createFileRoute('/(characters)/$characterId')({
     pendingComponent: () => (
@@ -31,16 +32,6 @@ function LoaderCharacterPage() {
         <Spinner />
     </div>)
 }
-
-function renderCharacterProp(label: string, value?: string | number | boolean | null) {
-    return (
-        <div className="grid gap-2">
-            <span className="text-character-item-label">{label}</span>
-            <span className="text-character-item-description">{value || "Unknown"}</span>
-        </div>
-    )
-}
-
 
 export function RouteComponent() {
     const { character: initialCharacter, characterId } = Route.useLoaderData()
@@ -87,55 +78,54 @@ export function RouteComponent() {
                 <CharacterCard character={character} />
 
                 <div className="bg-character-card rounded-[20px] p-6 gap-[18px] flex flex-col">
-                    <div className="section-header">
-                        <img src="/icons/user.png" alt="Basic Information" />
-                        <h2 className="section-header-title">Basic Information</h2>
-                    </div>
+                    <InfoSection
+                        icon={<img src="/icons/user.png" alt="Basic Information" />}
+                        title="Basic Information"
+                    >
+                        <InfoSection.Grid>
+                            <InfoSection.Item label="Species" value={character.species || 'Unknown'} />
+                            <InfoSection.Item label="Gender" value={character.gender || 'Unknown'} />
+                            <InfoSection.Item label="Date of birth" value={formatDate(character.dateOfBirth)} />
+                            <InfoSection.Item label="Ancestry" value={character.ancestry || 'Unknown'} />
+                            <InfoSection.Item label="Eye colour" value={character.eyeColour || 'Unknown'} />
+                            <InfoSection.Item label="Hair color" value={character.hairColour || 'Unknown'} />
+                        </InfoSection.Grid>
+                    </InfoSection>
 
-                    <div className="grid gap-4 sm:grid-cols-2">
-                        {renderCharacterProp('Species', character.species)}
-                        {renderCharacterProp('Gender', character.gender)}
-                        {renderCharacterProp('Date of birth', formatDate(character.dateOfBirth))}
-                        {renderCharacterProp('Ancestry', character.ancestry)}
-                        {renderCharacterProp('Eye colour', character.eyeColour)}
-                        {renderCharacterProp('Hair color', character.hairColour)}
-                    </div>
+                    <InfoSection.Divider />
 
+                    <InfoSection
+                        icon={<img src="/icons/sparkles.png" alt="Magical Information" />}
+                        title="Magical Information"
+                    >
+                        <InfoSection.Grid>
+                            <InfoSection.Item label="Wizard/Witch" value={displayYesNo(character.wizard)} />
+                            <InfoSection.Item label="Patronus" value={character.patronus || 'Unknown'} />
+                        </InfoSection.Grid>
+                    </InfoSection>
 
-                    <div className="separator"></div>
+                    <InfoSection.Divider />
 
-                    <div className="section-header">
-                        <img src="/icons/sparkles.png" alt="Magical Information" />
-                        <h2 className="section-header-title">Magical Information</h2>
-                    </div>
+                    <InfoSection
+                        icon={<img src="/icons/place-of-worship.png" alt="Hogwarts" />}
+                        title="Hogwarts"
+                    >
+                        <InfoSection.Grid>
+                            <InfoSection.Item label="Student" value={displayYesNo(character.hogwartsStudent)} />
+                            <InfoSection.Item label="Staff" value={displayYesNo(character.hogwartsStaff)} />
+                        </InfoSection.Grid>
+                    </InfoSection>
 
-                    <div className="grid gap-4 sm:grid-cols-2">
-                        {renderCharacterProp('Wizard / witch', displayYesNo(character.wizard))}
-                        {renderCharacterProp('Patronus', character.patronus)}
-                    </div>
+                    <InfoSection.Divider />
 
-                    <div className="separator"></div>
-
-                    <div className="section-header">
-                        <img src="/icons/place-of-worship.png" alt="Hogwarts" />
-                        <h2 className="section-header-title">Hogwarts</h2>
-                    </div>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                        {renderCharacterProp('Student', displayYesNo(character.hogwartsStudent))}
-                        {renderCharacterProp('Staff', displayYesNo(character.hogwartsStaff))}
-                    </div>
-
-                    <div className="separator"></div>
-
-                    <div className="section-header">
-                        <img src="/icons/book-open.png" alt="Portrayed by" />
-                        <h2 className="section-header-title">Portrayed by</h2>
-                    </div>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                        {renderCharacterProp('Actor', character.actor)}
-                        {character.alternate_actors && character.alternate_actors.length > 0 &&
-                            renderCharacterProp('Alternate actors', character.alternate_actors.join(', '))}
-                    </div>
+                    <InfoSection
+                        icon={<img src="/icons/book-open.png" alt="Portrayed by" />}
+                        title="Portrayed by"
+                    >
+                        <InfoSection.Grid>
+                            <InfoSection.Item label="" value={character.actor || 'Unknown'} />
+                        </InfoSection.Grid>
+                    </InfoSection>
                 </div>
             </div>
         </div>
