@@ -82,8 +82,8 @@ export function RouteComponent() {
     }
 
     return (
-        <div className="container mx-auto py-15 grid gap-[18px] max-w-[824px]">
-            <div className="grid gap-6 lg:grid-cols-[262px_1fr]">
+        <div className="container mx-auto py-15 max-w-[824px]">
+            <div className="grid gap-[18px] lg:grid-cols-[262px_1fr]">
                 <CharacterCard character={character} />
 
                 <div className="bg-character-card rounded-[20px] p-6 gap-[18px] flex flex-col">
