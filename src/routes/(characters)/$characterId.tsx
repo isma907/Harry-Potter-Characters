@@ -99,7 +99,7 @@ export function RouteComponent() {
                         title="Magical Information"
                     >
                         <InfoSection.Grid>
-                            <InfoSection.Item label="Wizard/Witch" value={displayYesNo(character.wizard)} />
+                            <InfoSection.Item label="Wizard / witch" value={displayYesNo(character.wizard)} />
                             <InfoSection.Item label="Patronus" value={character.patronus || 'Unknown'} />
                         </InfoSection.Grid>
                     </InfoSection>
@@ -123,7 +123,14 @@ export function RouteComponent() {
                         title="Portrayed by"
                     >
                         <InfoSection.Grid>
-                            <InfoSection.Item label="" value={character.actor || 'Unknown'} />
+                            <InfoSection.Item label="Actor" value={character.actor || 'Unknown'} />
+
+                            {character.alternate_actors && character.alternate_actors.length > 0 && (
+                                <InfoSection.Item
+                                    label="Alternate actors"
+                                    value={character.alternate_actors.join(', ')}
+                                />
+                            )}
                         </InfoSection.Grid>
                     </InfoSection>
                 </div>
