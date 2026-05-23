@@ -40,6 +40,11 @@
     @apply bg-background text-foreground;
   }
 
+
+  .characters-wrapper {
+    max-width: 1580px;
+  }
+
   .bg-character-card {
     background-color: var(--color-character-card-bg);
   }

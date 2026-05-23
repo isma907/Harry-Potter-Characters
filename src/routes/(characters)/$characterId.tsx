@@ -73,7 +73,7 @@ export function RouteComponent() {
     }
 
     return (
-        <div className="container mx-auto py-15 max-w-[824px]">
+        <div className="container mx-auto py-15 max-w-[824px] mt-[25px]">
             <div className="grid gap-[18px] lg:grid-cols-[262px_1fr]">
                 <CharacterCard character={character} />
 
@@ -99,7 +99,7 @@ export function RouteComponent() {
                         title="Magical Information"
                     >
                         <InfoSection.Grid>
-                            <InfoSection.Item label="Wizard / witch" value={displayYesNo(character.wizard)} />
+                            <InfoSection.Item label="Wizard/witch" value={displayYesNo(character.wizard)} />
                             <InfoSection.Item label="Patronus" value={character.patronus || 'Unknown'} />
                         </InfoSection.Grid>
                     </InfoSection>

@@ -11,7 +11,7 @@ export const Route = createRootRouteWithContext<{
 
 function RootComponent() {
   return (
-    <div className="flex min-h-screen flex-col gap-8">
+    <div className="flex min-h-screen flex-col gap-[10px]">
       <HousePreferenceGateway>
         <Toolbar />
         <Outlet />

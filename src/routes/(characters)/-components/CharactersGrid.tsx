@@ -44,8 +44,8 @@ export const CharactersGrid = () => {
 
   return (
     <>
-      <div className="flex justify-center">
-        <div className="filter-wrapper flex gap-1 p-1">
+      <div className="flex justify-center py-[10px]">
+        <div className="filter-wrapper flex p-1">
           {filterOptions.map((opt) => (
             <Link
               key={opt.value}
@@ -70,11 +70,14 @@ export const CharactersGrid = () => {
           <p className="text-sm text-amber-200/30">Try adjusting your filters or search query.</p>
         </div>
       ) : (
-        <div className="container mx-auto grid w-min grid-cols-[repeat(auto-fill,minmax(200px,max-content))] gap-4">
+        <div className="characters-wrapper mx-auto grid grid-cols-[repeat(auto-fill,250px)] justify-center gap-4">
           {filteredCharacters.map((character) => (
-            <Link to={"/$characterId"} params={{ characterId: character.id }} key={character.id} >
+            <Link
+              key={character.id}
+              to="/$characterId"
+              params={{ characterId: character.id }}
+            >
               <CharacterCard
-                key={character.id}
                 character={character}
                 className="transition-transform duration-300 hover:scale-105 hover:shadow-xl"
               />
