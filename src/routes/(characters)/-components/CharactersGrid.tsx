@@ -5,10 +5,11 @@ import { Link } from "@tanstack/react-router";
 import { Route } from "../index";
 import { useAppStore } from "@lib/hooks/useAppStore";
 import { cn } from "@lib/utils";
+import { CharacterFilter, filterOptions } from "@lib/constants/filters";
 
 export const CharactersGrid = () => {
   const { characters, isLoading, isError } = useCharacters();
-  const { filter = "all" } = Route.useSearch();
+  const { filter = CharacterFilter.ALL } = Route.useSearch();
   const favorites = useAppStore((state) => state.favorites || []);
 
   if (isLoading) {
@@ -29,18 +30,12 @@ export const CharactersGrid = () => {
   }
 
   const filteredCharacters = characters.filter((character) => {
-    if (filter === "students") return character.hogwartsStudent;
-    if (filter === "staff") return character.hogwartsStaff;
-    if (filter === "favorite") return favorites.includes(character.id);
+    if (filter === CharacterFilter.STUDENTS) return character.hogwartsStudent;
+    if (filter === CharacterFilter.STAFF) return character.hogwartsStaff;
+    if (filter === CharacterFilter.FAVORITE) return favorites.includes(character.id);
     return true;
   });
 
-  const filterOptions = [
-    { value: "all", label: "All Characters" },
-    { value: "students", label: "Students" },
-    { value: "staff", label: "Staff" },
-    { value: "favorite", label: "Favorite" },
-  ] as const;
 
   return (
     <>
